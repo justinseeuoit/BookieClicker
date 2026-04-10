@@ -1,0 +1,1417 @@
+[gd_scene format=3 uid="uid://bhcxcco6wy2sx"]
+
+[ext_resource type="Texture2D" uid="uid://ddvftap14jxkv" path="res://assets/sprites/book.png" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://2h54si2tjy7x" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://b6q8nwo67xm75" path="res://scripts/animations.gd" id="2_lbhrr"]
+[ext_resource type="Script" uid="uid://db13ogwky1min" path="res://scripts/destroy_1sec.gd" id="2_p57ef"]
+[ext_resource type="Script" uid="uid://38qutjgluswx" path="res://scripts/stats.gd" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://5wi4v7l68tly" path="res://assets/sprites/sunburst.png" id="5_iywne"]
+[ext_resource type="AudioStream" uid="uid://dknvfcc5etqcf" path="res://assets/audio/bookpress.mp3" id="7_gee14"]
+[ext_resource type="Script" uid="uid://legvhy8cqcwp" path="res://scripts/start_overlay.gd" id="7_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://dota6e8lwec1i" path="res://assets/audio/buttonpress.mp3" id="8_vtaks"]
+[ext_resource type="AudioStream" uid="uid://n6wpmwmffg6g" path="res://assets/audio/bgmusic.mp3" id="9_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://id2g5uo1udy5" path="res://assets/audio/victory.mp3" id="10_kvpfn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnu2h"]
+bg_color = Color(0, 0.6509804, 0.8901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvpfn"]
+bg_color = Color(0.102900706, 0.2745298, 0.44645393, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p57ef"]
+bg_color = Color(0.05882353, 0.18431373, 0.30980393, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5sy4"]
+bg_color = Color(0.05882353, 0.18431373, 0.30980393, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gee14"]
+bg_color = Color(0.05882353, 0.18431373, 0.30980393, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tnpc"]
+bg_color = Color(0.05882353, 0.18431373, 0.30980393, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtaks"]
+bg_color = Color(0.05882353, 0.18431373, 0.30980393, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="GDScript" id="GDScript_vtaks"]
+script/source = "extends ScrollContainer
+
+@onready var grinder_1: Button = $UpgradeList/Grinder1
+@onready var grinder_2: Button = $UpgradeList/Grinder2
+@onready var grinder_3: Button = $UpgradeList/Grinder3
+@onready var grinder_4: Button = $UpgradeList/Grinder4
+@onready var grinder_5: Button = $UpgradeList/Grinder5
+@onready var grinder_6: Button = $UpgradeList/Grinder6
+@onready var grinder_7: Button = $UpgradeList/Grinder7
+@onready var grinder_8: Button = $UpgradeList/Grinder8
+"
+
+[sub_resource type="GDScript" id="GDScript_kvpfn"]
+script/source = "extends ScrollContainer
+
+@onready var click_upgrade: Button = $UpgradeList/ClickUpgrade
+@onready var author_upgrade: Button = $UpgradeList/AuthorUpgrade
+@onready var author_upgrade_2: Button = $UpgradeList/AuthorUpgrade2
+@onready var author_upgrade_3: Button = $UpgradeList/AuthorUpgrade3
+@onready var scholar_upgrade: Button = $UpgradeList/ScholarUpgrade
+@onready var scholar_upgrade_2: Button = $UpgradeList/ScholarUpgrade2
+@onready var scholar_upgrade_3: Button = $UpgradeList/ScholarUpgrade3
+@onready var click_upgrade_2: Button = $UpgradeList/ClickUpgrade2
+@onready var grad_upgrade: Button = $UpgradeList/GradUpgrade
+@onready var grad_upgrade_2: Button = $UpgradeList/GradUpgrade2
+@onready var grad_upgrade_3: Button = $UpgradeList/GradUpgrade3
+@onready var prof_upgrade: Button = $UpgradeList/ProfUpgrade
+@onready var prof_upgrade_2: Button = $UpgradeList/ProfUpgrade2
+@onready var prof_upgrade_3: Button = $UpgradeList/ProfUpgrade3
+@onready var click_upgrade_3: Button = $UpgradeList/ClickUpgrade3
+@onready var prodigy_upgrade: Button = $UpgradeList/ProdigyUpgrade
+@onready var prodigy_upgrade_2: Button = $UpgradeList/ProdigyUpgrade2
+@onready var prodigy_upgrade_3: Button = $UpgradeList/ProdigyUpgrade3
+@onready var neophyte_upgrade: Button = $UpgradeList/NeophyteUpgrade
+@onready var neophyte_upgrade_2: Button = $UpgradeList/NeophyteUpgrade2
+@onready var neophyte_upgrade_3: Button = $UpgradeList/NeophyteUpgrade3
+@onready var sorcerer_upgrade: Button = $UpgradeList/SorcererUpgrade
+@onready var sorcerer_upgrade_2: Button = $UpgradeList/SorcererUpgrade2
+@onready var sorcerer_upgrade_3: Button = $UpgradeList/SorcererUpgrade3
+@onready var wizard_upgrade: Button = $UpgradeList/WizardUpgrade
+@onready var wizard_upgrade_2: Button = $UpgradeList/WizardUpgrade2
+@onready var wizard_upgrade_3: Button = $UpgradeList/WizardUpgrade3
+"
+
+[sub_resource type="GDScript" id="GDScript_dinhu"]
+script/source = "extends ScrollContainer
+
+@onready var win_label: Label = $UpgradeList/WinLabel
+@onready var win_button: Button = $UpgradeList/WinButton
+"
+
+[node name="Game" type="Control" unique_id=1841983764]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yqjtg")
+
+[node name="Indicators" type="Control" parent="." unique_id=1654768065]
+top_level = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Template" type="Label" parent="Indicators" unique_id=1519312296]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 5
+text = "+0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_p57ef")
+
+[node name="DestroyTimer" type="Timer" parent="Indicators/Template" unique_id=1010838909]
+wait_time = 0.2
+
+[node name="LeftPanel" type="Panel" parent="." unique_id=1852896337]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 735.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lnu2h")
+
+[node name="Background" type="TextureRect" parent="LeftPanel" unique_id=280614405]
+modulate = Color(1, 1, 1, 0.78431374)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(412.5, 324)
+texture = ExtResource("5_iywne")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LeftPanel" unique_id=1788678153]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+script = ExtResource("2_lbhrr")
+
+[node name="Stats" type="VBoxContainer" parent="LeftPanel/MarginContainer" unique_id=1782144458]
+layout_mode = 2
+script = ExtResource("3_lnu2h")
+
+[node name="BookLabel" type="Label" parent="LeftPanel/MarginContainer/Stats" unique_id=1856057220]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "0 Books"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BookPerSecLabel" type="Label" parent="LeftPanel/MarginContainer/Stats" unique_id=415284184]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+text = "0 PER SECOND"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="LeftPanel/MarginContainer" unique_id=2040783793]
+layout_mode = 2
+
+[node name="ClickButton" type="TextureButton" parent="LeftPanel/MarginContainer/CenterContainer" unique_id=103286968]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture_normal = ExtResource("1_uwrxv")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="BottomTab" type="HBoxContainer" parent="LeftPanel" unique_id=897980468]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 204.0
+grow_vertical = 0
+
+[node name="Save" type="Button" parent="LeftPanel/BottomTab" unique_id=1904504410]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftPanel/BottomTab/Save" unique_id=2140015067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="LeftPanel/BottomTab/Save/HBoxContainer" unique_id=2023925388]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Save"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Load" type="Button" parent="LeftPanel/BottomTab" unique_id=1380692514]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftPanel/BottomTab/Load" unique_id=604258965]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="LeftPanel/BottomTab/Load/HBoxContainer" unique_id=981519513]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Load"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reset" type="Button" parent="LeftPanel/BottomTab" unique_id=1493457598]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftPanel/BottomTab/Reset" unique_id=1684485913]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="LeftPanel/BottomTab/Reset/HBoxContainer" unique_id=1742143614]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Reset"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightPanel" type="Panel" parent="." unique_id=1928816991]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6501736
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_right = 4.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kvpfn")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightPanel" unique_id=1529356370]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="TabContainer" type="TabContainer" parent="RightPanel/VBoxContainer" unique_id=1731933515]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/tab_separation = 15
+theme_override_font_sizes/font_size = 24
+theme_override_styles/panel = SubResource("StyleBoxFlat_p57ef")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_u5sy4")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_gee14")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_0tnpc")
+theme_override_styles/tab_disabled = SubResource("StyleBoxFlat_vtaks")
+tab_alignment = 1
+current_tab = 0
+clip_tabs = false
+tab_0/title = "Grinders"
+tab_1/title = "Upgrades"
+tab_2/title = "WIN"
+
+[node name="GrinderTab" type="ScrollContainer" parent="RightPanel/VBoxContainer/TabContainer" unique_id=1126600674]
+layout_mode = 2
+size_flags_vertical = 3
+script = SubResource("GDScript_vtaks")
+metadata/_tab_index = 0
+metadata/_tab_name = "Grinders"
+
+[node name="UpgradeList" type="VBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab" unique_id=822633520]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Grinder1" type="Button" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList" unique_id=1417333854]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder1" unique_id=674900185]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder1/HBoxContainer" unique_id=2136986815]
+layout_mode = 2
+text = "Author"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Income" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder1/HBoxContainer" unique_id=1751815414]
+layout_mode = 2
+text = "(+0.1) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder1/HBoxContainer" unique_id=49210734]
+layout_mode = 2
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder1/HBoxContainer" unique_id=1723021117]
+layout_mode = 2
+text = "(0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grinder2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList" unique_id=1771846237]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder2" unique_id=1839840152]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder2/HBoxContainer" unique_id=1210650605]
+layout_mode = 2
+text = "Scholar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Income" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder2/HBoxContainer" unique_id=2109582881]
+layout_mode = 2
+text = "(+1) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder2/HBoxContainer" unique_id=312923750]
+layout_mode = 2
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder2/HBoxContainer" unique_id=1582662673]
+layout_mode = 2
+text = "(0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grinder3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList" unique_id=53313419]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder3" unique_id=592782611]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder3/HBoxContainer" unique_id=1304081708]
+layout_mode = 2
+text = "Graduate"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Income" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder3/HBoxContainer" unique_id=801771464]
+layout_mode = 2
+text = "(+8) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder3/HBoxContainer" unique_id=1162077954]
+layout_mode = 2
+text = "1.2k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder3/HBoxContainer" unique_id=800705362]
+layout_mode = 2
+text = "(0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grinder4" type="Button" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList" unique_id=1223195084]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder4" unique_id=1721807827]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder4/HBoxContainer" unique_id=1199301103]
+layout_mode = 2
+text = "Professor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Income" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder4/HBoxContainer" unique_id=1999579479]
+layout_mode = 2
+text = "(+48) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder4/HBoxContainer" unique_id=2026010987]
+layout_mode = 2
+text = "13k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder4/HBoxContainer" unique_id=991583421]
+layout_mode = 2
+text = "(0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grinder5" type="Button" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList" unique_id=1858673196]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder5" unique_id=1269056502]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder5/HBoxContainer" unique_id=508889877]
+layout_mode = 2
+text = "Prodigy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Income" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder5/HBoxContainer" unique_id=1790854994]
+layout_mode = 2
+text = "(+192) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder5/HBoxContainer" unique_id=1175283388]
+layout_mode = 2
+text = "140k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder5/HBoxContainer" unique_id=100573869]
+layout_mode = 2
+text = "(0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grinder6" type="Button" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList" unique_id=1804818399]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder6" unique_id=2130228956]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder6/HBoxContainer" unique_id=1162687439]
+layout_mode = 2
+text = "Neophyte"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Income" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder6/HBoxContainer" unique_id=631908299]
+layout_mode = 2
+text = "(+1.44k) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder6/HBoxContainer" unique_id=578600603]
+layout_mode = 2
+text = "1.5M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder6/HBoxContainer" unique_id=610163585]
+layout_mode = 2
+text = "(0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grinder7" type="Button" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList" unique_id=493608899]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder7" unique_id=30178148]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder7/HBoxContainer" unique_id=1911764767]
+layout_mode = 2
+text = "Sorcerer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Income" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder7/HBoxContainer" unique_id=1771359916]
+layout_mode = 2
+text = "(+7.92k) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder7/HBoxContainer" unique_id=2001278594]
+layout_mode = 2
+text = "18M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder7/HBoxContainer" unique_id=212038365]
+layout_mode = 2
+text = "(0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grinder8" type="Button" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList" unique_id=1806983125]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder8" unique_id=1846014228]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder8/HBoxContainer" unique_id=2057340405]
+layout_mode = 2
+text = "Wizard"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Income" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder8/HBoxContainer" unique_id=39509210]
+layout_mode = 2
+text = "(+39.6k) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder8/HBoxContainer" unique_id=68689725]
+layout_mode = 2
+text = "210M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="RightPanel/VBoxContainer/TabContainer/GrinderTab/UpgradeList/Grinder8/HBoxContainer" unique_id=671030328]
+layout_mode = 2
+text = "(0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeTab" type="ScrollContainer" parent="RightPanel/VBoxContainer/TabContainer" unique_id=1947904294]
+visible = false
+layout_mode = 2
+script = SubResource("GDScript_kvpfn")
+metadata/_tab_index = 1
+metadata/_tab_name = "Upgrades"
+
+[node name="UpgradeList" type="VBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab" unique_id=992244929]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClickUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=536078586]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade" unique_id=463151107]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade/HBoxContainer" unique_id=944475154]
+layout_mode = 2
+text = "Study (2x Click) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade/HBoxContainer" unique_id=870612790]
+layout_mode = 2
+text = "250"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=67909950]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade2" unique_id=1706623924]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade2/HBoxContainer" unique_id=313885848]
+layout_mode = 2
+text = "Research (3x Click) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade2/HBoxContainer" unique_id=1596642428]
+layout_mode = 2
+text = "25k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=159989670]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade3" unique_id=531481616]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade3/HBoxContainer" unique_id=1162053036]
+layout_mode = 2
+text = "Accounting (5x Click) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ClickUpgrade3/HBoxContainer" unique_id=2139101502]
+layout_mode = 2
+text = "5M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AuthorUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=2048976474]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade" unique_id=1921803983]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade/HBoxContainer" unique_id=335385843]
+layout_mode = 2
+text = "Drafting (4x Author) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade/HBoxContainer" unique_id=97708699]
+layout_mode = 2
+text = "750"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AuthorUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=197388277]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade2" unique_id=630946811]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade2/HBoxContainer" unique_id=1696073483]
+layout_mode = 2
+text = "Publishing (5x Author) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade2/HBoxContainer" unique_id=154042411]
+layout_mode = 2
+text = "2.25k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AuthorUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1200494878]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade3" unique_id=662795487]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade3/HBoxContainer" unique_id=1134963261]
+layout_mode = 2
+text = "Masterpiece (6x Author) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/AuthorUpgrade3/HBoxContainer" unique_id=1577422394]
+layout_mode = 2
+text = "6k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScholarUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1134503973]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade" unique_id=2072902642]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade/HBoxContainer" unique_id=555649470]
+layout_mode = 2
+text = "Analysis (4x Scholar) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade/HBoxContainer" unique_id=1588809435]
+layout_mode = 2
+text = "5k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScholarUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1808046710]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade2" unique_id=167837388]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade2/HBoxContainer" unique_id=1436191838]
+layout_mode = 2
+text = "Theory (5x Scholar) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade2/HBoxContainer" unique_id=974219334]
+layout_mode = 2
+text = "15k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScholarUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=443412022]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade3" unique_id=926615569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade3/HBoxContainer" unique_id=1977193237]
+layout_mode = 2
+text = "Thesis( 6x Scholar) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ScholarUpgrade3/HBoxContainer" unique_id=976249482]
+layout_mode = 2
+text = "40k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GradUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1183138733]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade" unique_id=872458808]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade/HBoxContainer" unique_id=1672058657]
+layout_mode = 2
+text = "Internship (4x Grad) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade/HBoxContainer" unique_id=256321625]
+layout_mode = 2
+text = "60k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GradUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=924485411]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade2" unique_id=608595919]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade2/HBoxContainer" unique_id=1801458904]
+layout_mode = 2
+text = "Dissertation (5x Grad) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade2/HBoxContainer" unique_id=1645129008]
+layout_mode = 2
+text = "180k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GradUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=370272996]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade3" unique_id=751596900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade3/HBoxContainer" unique_id=86863293]
+layout_mode = 2
+text = "Doctorate (6x Grad) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/GradUpgrade3/HBoxContainer" unique_id=801645198]
+layout_mode = 2
+text = "480k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProfUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=111475782]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade" unique_id=204736994]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade/HBoxContainer" unique_id=641951555]
+layout_mode = 2
+text = "Lecture (4x Prof) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade/HBoxContainer" unique_id=1536359613]
+layout_mode = 2
+text = "650k"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProfUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1927372735]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade2" unique_id=1108363004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade2/HBoxContainer" unique_id=1596796158]
+layout_mode = 2
+text = "Tenure (5x Prof) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade2/HBoxContainer" unique_id=1065899155]
+layout_mode = 2
+text = "1.95M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProfUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=808857554]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade3" unique_id=601181270]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade3/HBoxContainer" unique_id=1930958544]
+layout_mode = 2
+text = "Endowment (6x Prof) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProfUpgrade3/HBoxContainer" unique_id=1070708993]
+layout_mode = 2
+text = "5.2M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProdigyUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=268022494]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade" unique_id=1825178995]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade/HBoxContainer" unique_id=154128298]
+layout_mode = 2
+text = "Genius (4x Prodigy) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade/HBoxContainer" unique_id=1300757913]
+layout_mode = 2
+text = "7M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProdigyUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=351015978]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade2" unique_id=643867854]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade2/HBoxContainer" unique_id=730745493]
+layout_mode = 2
+text = "Breakthrough (5x Prodigy) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade2/HBoxContainer" unique_id=2057219670]
+layout_mode = 2
+text = "21M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProdigyUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=626128791]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade3" unique_id=1327261143]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade3/HBoxContainer" unique_id=1894782778]
+layout_mode = 2
+text = "Revelation (6x Prodigy) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/ProdigyUpgrade3/HBoxContainer" unique_id=1477369734]
+layout_mode = 2
+text = "56M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NeophyteUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=902791639]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade" unique_id=857706819]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade/HBoxContainer" unique_id=1215914517]
+layout_mode = 2
+text = "Initiation (4x Neophyte) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade/HBoxContainer" unique_id=76327877]
+layout_mode = 2
+text = "75M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NeophyteUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=753177088]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade2" unique_id=1230606321]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade2/HBoxContainer" unique_id=1585545985]
+layout_mode = 2
+text = "Apprentice (5x Neophyte) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade2/HBoxContainer" unique_id=401526095]
+layout_mode = 2
+text = "225M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NeophyteUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1815310606]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade3" unique_id=1848706817]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade3/HBoxContainer" unique_id=525677177]
+layout_mode = 2
+text = "Ascension (6x Neophyte) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/NeophyteUpgrade3/HBoxContainer" unique_id=587377031]
+layout_mode = 2
+text = "600M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SorcererUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=668713312]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade" unique_id=1623086144]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade/HBoxContainer" unique_id=900252052]
+layout_mode = 2
+text = "Spellcraft (4x Sorcerer) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade/HBoxContainer" unique_id=1198620405]
+layout_mode = 2
+text = "900M"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SorcererUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=488700959]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade2" unique_id=1192459455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade2/HBoxContainer" unique_id=1087233251]
+layout_mode = 2
+text = "Arcana (5x Sorcerer) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade2/HBoxContainer" unique_id=1124576607]
+layout_mode = 2
+text = "2.7B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SorcererUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1015598029]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade3" unique_id=1324063538]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade3/HBoxContainer" unique_id=545930592]
+layout_mode = 2
+text = "Quanta (6x Sorcerer) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/SorcererUpgrade3/HBoxContainer" unique_id=129955419]
+layout_mode = 2
+text = "7.2B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WizardUpgrade" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1277696094]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade" unique_id=1574710487]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade/HBoxContainer" unique_id=1961090851]
+layout_mode = 2
+text = "Runes (4x Wizard) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade/HBoxContainer" unique_id=1405332821]
+layout_mode = 2
+text = "10.5B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WizardUpgrade2" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1455482619]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade2" unique_id=88468772]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade2/HBoxContainer" unique_id=87026353]
+layout_mode = 2
+text = "Enchantment (5x Wizard) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade2/HBoxContainer" unique_id=1571947607]
+layout_mode = 2
+text = "31.5B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WizardUpgrade3" type="Button" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList" unique_id=1573197389]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade3" unique_id=1507059455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade3/HBoxContainer" unique_id=2034751208]
+layout_mode = 2
+text = "Ritual (6x Wizard) -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/UpgradeTab/UpgradeList/WizardUpgrade3/HBoxContainer" unique_id=831640645]
+layout_mode = 2
+text = "84B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinTab" type="ScrollContainer" parent="RightPanel/VBoxContainer/TabContainer" unique_id=1088302433]
+visible = false
+layout_mode = 2
+script = SubResource("GDScript_dinhu")
+metadata/_tab_index = 2
+metadata/_tab_name = "WIN"
+
+[node name="UpgradeList" type="VBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/WinTab" unique_id=1232364208]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WinLabel" type="Label" parent="RightPanel/VBoxContainer/TabContainer/WinTab/UpgradeList" unique_id=705305732]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "To win, you must collect
+1T Books! Time to start
+reading!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinButton" type="Button" parent="RightPanel/VBoxContainer/TabContainer/WinTab/UpgradeList" unique_id=1560445104]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightPanel/VBoxContainer/TabContainer/WinTab/UpgradeList/WinButton" unique_id=373064367]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="RightPanel/VBoxContainer/TabContainer/WinTab/UpgradeList/WinButton/HBoxContainer" unique_id=60720740]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "WIN -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="RightPanel/VBoxContainer/TabContainer/WinTab/UpgradeList/WinButton/HBoxContainer" unique_id=502973319]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "1T"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartOverlay" type="Control" parent="." unique_id=987860887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_u5sy4")
+
+[node name="ColorRect" type="ColorRect" parent="StartOverlay" unique_id=1630886455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="CenterContainer" type="CenterContainer" parent="StartOverlay" unique_id=1737390277]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.0
+offset_top = -27.5
+offset_right = 223.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartLabel" type="Label" parent="StartOverlay/CenterContainer" unique_id=445824426]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Left Click to Start/Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sfx_book" type="AudioStreamPlayer" parent="." unique_id=485653131]
+stream = ExtResource("7_gee14")
+
+[node name="sfx_button" type="AudioStreamPlayer" parent="." unique_id=1645687789]
+stream = ExtResource("8_vtaks")
+
+[node name="sfx_win" type="AudioStreamPlayer" parent="." unique_id=39388592]
+stream = ExtResource("10_kvpfn")
+volume_db = 5.0
+
+[node name="music_bg" type="AudioStreamPlayer" parent="." unique_id=1740280525]
+stream = ExtResource("9_0tnpc")
+volume_db = -20.0
+autoplay = true
+
+[connection signal="book_clicked" from="." to="LeftPanel/MarginContainer" method="_on_game_book_clicked"]
+[connection signal="books_changed" from="." to="LeftPanel/MarginContainer/Stats" method="_on_game_books_changed"]
+[connection signal="books_per_second_changed" from="." to="LeftPanel/MarginContainer/Stats" method="_on_game_books_per_second_changed"]
+[connection signal="timeout" from="Indicators/Template/DestroyTimer" to="Indicators/Template" method="_on_destroy_timer_timeout"]
+[connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="." method="_on_click_button_button_down"]
+[connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="LeftPanel/MarginContainer" method="_on_click_button_button_down"]
+[connection signal="button_up" from="LeftPanel/MarginContainer/CenterContainer/ClickButton" to="LeftPanel/MarginContainer" method="_on_click_button_button_up"]
+[connection signal="pressed" from="LeftPanel/BottomTab/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="LeftPanel/BottomTab/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="LeftPanel/BottomTab/Reset" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="RightPanel/VBoxContainer/TabContainer/WinTab/UpgradeList/WinButton" to="." method="_on_win_button_pressed"]
